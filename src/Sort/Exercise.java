@@ -31,13 +31,17 @@ public class Exercise {
                 map.put(c,value);
             }
         }
+        StringBuilder builder = new StringBuilder("");
 
         Set<Character> characters = map.keySet();
         Iterator<Character> iterator = characters.iterator();
+
         while (iterator.hasNext()){
             Character key = iterator.next();
             System.out.println(key+" : " + map.get(key));
+            builder.append(map.get(key)).append(key);
         }
+        System.out.println(builder.toString());
 
         return null;
     }
