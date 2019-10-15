@@ -59,21 +59,32 @@ public class MyArrayList<E> implements MyList<E> {
 
     @Override
     public void remove(int index) {
-
+        Object obj =get(index);
+        int numMoved = elements.length-index-1;
+        if(numMoved>0){
+            System.arraycopy(elements, index+1, elements, index,numMoved);
+        }
+        elements[--size] = null;
     }
 
     @Override
     public void remove(E e) {
-
+        for (int i = 0; i <elements.length ; i++) {
+            Object element = elements[i];
+            if (element.equals(e)) {
+                remove(e);
+            }
+        }
     }
 
     @Override
     public int getSize() {
-        return 0;
+        return size;
     }
 
     @Override
     public Object get(int index) {
-        return null;
+        rangeIndex(index);
+        return elements[index];
     }
 }
