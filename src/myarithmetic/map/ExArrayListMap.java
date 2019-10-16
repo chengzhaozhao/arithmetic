@@ -2,7 +2,6 @@ package myarithmetic.map;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author chengzhzh@datangmobile.com
@@ -14,6 +13,36 @@ public class ExArrayListMap<Key,Value> {
     public void put(Key key,Value value){
         // 判断 key 是否重复
         Entry existEntry = getEntry(key);
+        if (existEntry!=null) {
+            existEntry.value = value;
+            return;
+        }
+        Entry entry = new Entry<Key,Value>(key,value);
+        tables.add(entry);
+    }
+
+
+    public Value get(String key){
+        for (Entry<Key, Value> table : tables) {
+            if (table.key.equals(key)) {
+                return table.value;
+            }
+        }
+        return null;
+    }
+
+
+   public void remove(Key key){
+       Entry entry = getEntry(key);
+       if (entry != null) {
+           tables.remove(key);
+       }
+   }
+
+
+
+    public int getHash(Key key) {
+        return 0;
     }
 
     public Entry getEntry(Key key) {
@@ -28,7 +57,6 @@ public class ExArrayListMap<Key,Value> {
     class Entry<Key,Value>{
 
         Key key;
-
         Value value;
 
         public Entry(Key key,Value value){
